@@ -46,11 +46,8 @@ bool compare(string temp1, string temp2) {
           for(int i=0; i<temp1.length(); i++) {
                if(temp1[i]!=temp2[i]) {
                     // printf("%c %c\n", temp1[i], temp2[i]);
-
                     return temp1[i]<temp2[i];
                }  
           }
-
-          // return true;
      } 
 }
