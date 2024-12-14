@@ -1,39 +1,58 @@
 #include <iostream>
-#include <utility>
+#include <cstdio>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <map>
+#include <stack>
+#include <queue>
 #include <deque>
 
 using namespace std;
 
-int n;
-deque<pair<int, int>> dq;
+int main() {   
+     int n;
+     scanf("%d", &n);
 
-int main() {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
+     deque<pair<int, int>> circle;
+     for(int i=0; i<n; i++) {
+          int temp;
+          scanf("%d", &temp);
 
-	cin >> n;
-	for (int i = 0; i < n;i++) {
-		int tmp;
-		cin >> tmp;
-		dq.push_back(make_pair(tmp, i+1));
-	}
+          circle.push_back(make_pair(i+1, temp));
+     }
 
-	while (true) {
-		int cnt = dq.front().first;
-		cout << dq.front().second << " ";
-		dq.pop_front();
-		if (dq.empty()) break;
-		if (cnt > 0) {
-			for (int i = 0; i < cnt - 1;i++) {
-				dq.push_back(dq.front());
-				dq.pop_front();
-			}
-		}
-		else {
-			for (int i = cnt; i < 0;i++) {
-				dq.push_front(dq.back());
-				dq.pop_back();
-			}
-		}
-	}
+     vector<int> order;
+     while(!circle.empty()) {
+          pair<int, int> front_pair = circle.front();
+          int cmd = front_pair.second;
+          int index = front_pair.first;
+
+          order.push_back(index);
+          circle.pop_front();
+
+          if(circle.empty()) break;
+
+          if(cmd>0) {
+               for(int i=0; i<cmd-1; i++) {
+                    pair<int, int> temp = circle.front();
+                    circle.pop_front();
+                    circle.push_back(temp);
+               }
+          }
+          else {
+               cmd *= -1;
+               for(int i=0; i<cmd; i++) {
+                    pair<int, int> temp = circle.back();
+                    circle.pop_back();
+                    circle.push_front(temp);
+               }
+          }
+     }
+
+     for(auto x: order) {
+          printf("%d ", x);
+     }
 }
