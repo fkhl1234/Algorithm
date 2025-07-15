@@ -36,10 +36,10 @@ int main() {
     }
     min_city.push_back(n-1);
 
-    int sum = 0;
+    long long int sum = 0;
     int start_idx = 0;
     for(int i=0; i<min_city.size()-1; i++) {
-        int dist_sum = 0;
+        long long int dist_sum = 0;
         for(int j=min_city[i]; j<min_city[i+1]; j++) {
             dist_sum += dist[j];
         }
@@ -47,7 +47,7 @@ int main() {
         sum += dist_sum * price[min_city[i]];
     }
 
-    printf("%d\n", sum);
+    printf("%lld\n", sum);
 
     return 0;
 }
