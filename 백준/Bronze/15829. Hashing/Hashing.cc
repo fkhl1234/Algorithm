@@ -15,7 +15,7 @@ int main() {
     long long cardi = 1;
     for(int i=0; i<n; i++) {
         int c = string[i] - 'a' + 1;
-        hash_res += c * cardi;
+        hash_res = (hash_res + c * cardi) % M;
         cardi = ((cardi % M) * 31) % M;
     }
 
